@@ -22,29 +22,29 @@ All of the implementations are done in Udacity workspace by using the CARLA stim
 All the running steps are written in the [how_to_run.txt](project/how_to_run.txt)
 
 After cmake file, by using the following files (replaced), make the file and follow the running stimulation steps. These are the important files that needs to complete the project:
-1. [behavior_planner_FSM.cpp](project/starter_files/behavior_planner_FSM.cpp)
-2. [cost_functions.cpp](project/starter_files/cost_functions.cpp)
-3. [motion_planner.cpp](project/starter_files/motion_planner.cpp)
-4. [velocity_profile_generator.cpp](project/starter_files/velocity_profile_generator.cpp)
-5. [planning_params.h](project/starter_files/planning_params.h)
+1. [behavior_planner_FSM.cpp](code/behavior_planner_FSM.cpp)
+2. [cost_functions.cpp](code/cost_functions.cpp)
+3. [motion_planner.cpp](code/motion_planner.cpp)
+4. [velocity_profile_generator.cpp](code/velocity_profile_generator.cpp)
+5. [planning_params.h](code/planning_params.h)
 
 # Demonstration
 These are few pictures showing in the full [video](https://youtu.be/I-BYNxyNgKQ)
 
 ## Car is Ready and Target The Lane (Start Scene)
-![Alt Text](project/images/starting_sceen.png)
+![Alt Text](images/starting_sceen.png)
 
 ## Car Changes Lane when Detecting Car on The Right Side
-![Alt Text](project/images/turn_left.png)
+![Alt Text](images/turn_left.png)
 
 ## Car Changes Lane when Detecting Car on The Left Side
-![Alt Text](project/images/turn_right.png)
+![Alt Text](images/turn_right.png)
 
 ## Car Stay on The Lane
-![Alt Text](project/images/moving_straight.png)
+![Alt Text](images/moving_straight.png)
 
 ## Car Stops (End Scene)
-![Alt Text](project/images/end_sceen.png)
+![Alt Text](images/end_sceen.png)
 
 # Conclusion
 This project is showing how the motion planning and decision making on the autonomous driving system. Although in the stimulator, it seems the driving system can avoid all the obstacles and drive safely, but there are still a lot of aspects needed to be considered such as in real-time moving vehicles, pedestrians and extreme weather. 
