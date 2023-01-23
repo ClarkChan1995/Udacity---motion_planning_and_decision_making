@@ -33,12 +33,10 @@ velocity profile for each of the states that the vehicle can be in.
 In the "Follow_lane" state we need to either speed up or speed down to maintain
 a speed target. In the "decel_to_stop" state we need to create a profile that
 allows us to decelerate smoothly to a stop line.
-
 The order of precedence for handling these cases is stop sign handling and then
 nominal lane maintenance. In a real velocity planner you would need to handle
 the coupling between these states, but for simplicity this project can be
 implemented by isolating each case.
-
 For all trajectories, the required acceleration is given by _a_max (confortable
 accel).
 Look at the structs.h for details on the types of manuevers/states that the
@@ -344,7 +342,6 @@ std::vector<TrajectoryPoint> VelocityProfileGenerator::nominal_trajectory(
 /*
 Using d = (v_f^2 - v_i^2) / (2 * a), compute the distance
 required for a given acceleration/deceleration.
-
 Inputs: v_i - the initial speed in m/s.
         v_f - the final speed in m/s.
         a - the acceleration in m/s^2.
@@ -362,7 +359,8 @@ double VelocityProfileGenerator::calc_distance(const double& v_i,
     // v_i (initial velocity) to v_f (final velocity) at a constant
     // acceleration/deceleration "a". HINT look at the description of this
     // function. Make sure you handle div by 0
-    d = 0;  // <- Update
+    // d = 0;  // <- Update
+    d = ((v_f * v_f)-(v_i * v_i))/(2*a);
   }
   return d;
 }
@@ -384,8 +382,9 @@ double VelocityProfileGenerator::calc_final_speed(const double& v_i,
   // description of this function. Make sure you handle negative discriminant
   // and make v_f = 0 in that case. If the discriminant is inf or nan return
   // infinity
-
-  double disc = 0;  // <- Fix this
+  v_f = sqrt(pow(v_i,2)+2*d*a);
+  // double disc = 0;  // <- Fix this
+  double disc = pow(v_f,2)-4*a*v_i;
   if (disc <= 0.0) {
     v_f = 0.0;
   } else if (disc == std::numeric_limits<double>::infinity() ||

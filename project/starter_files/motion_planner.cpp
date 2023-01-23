@@ -22,7 +22,6 @@ State MotionPlanner::get_goal_state_in_ego_frame(const State& ego_state,
   /* Rotate such that the ego state has zero heading/yaw in the new frame.
      We are rotating by -ego_state "yaw" to ensure the ego vehicle's
      current yaw corresponds to theta = 0 in the new local frame.
-
      Recall that the general rotation matrix around the Z axix is:
      [cos(theta) -sin(theta)
      sin(theta)  cos(theta)]
@@ -85,6 +84,7 @@ std::vector<State> MotionPlanner::generate_offset_goals(
   // TODO-Perpendicular direction: ADD pi/2 to the goal yaw
   // (goal_state.rotation.yaw)
   //auto yaw = ;  // <- Fix This
+  auto yaw_plus_90 = M_PI_2+goal_state.rotation.yaw;
 
   // LOG(INFO) << "MAIN GOAL";
   // LOG(INFO) << "x: " << goal_state.location.x << " y: " <<
@@ -111,6 +111,8 @@ std::vector<State> MotionPlanner::generate_offset_goals(
     // std::cos(yaw_plus_90) and std::sin(yaw_plus_90)
     // goal_offset.location.x += ;  // <- Fix This
     // goal_offset.location.y += ;  // <- Fix This
+    goal_offset.location.x = goal_offset.location.x + offset * std::cos(yaw_plus_90); 
+    goal_offset.location.y = goal_offset.location.y + offset * std::sin(yaw_plus_90); 
     // LOG(INFO) << "x: " << goal_offset.location.x
     //          << " y: " << goal_offset.location.y
     //          << " z: " << goal_offset.location.z
